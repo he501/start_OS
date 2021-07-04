@@ -20,7 +20,7 @@ echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /et
 
 apt update
 apt upgrade -y
-apt install -y git vim curl ibus-mozc language-pack-ja openssh-server guake python3-pip google-chrome-stable code expect
+apt install -y git vim gcc curl ibus-mozc language-pack-ja openssh-server guake python3-pip google-chrome-stable code expect
 
 #gnome setting
 
