@@ -6,25 +6,24 @@ name=$1
 config_dir=/home/$name/.config
 
 echo "USER NAME IS $name"
-
 cd  $(dirname $0)
 
-wget -q -O - https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+wget -q -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/vscode.gpg
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-chrome.gpg
 
-echo "deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+echo "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
 #install
 
 apt update
 apt upgrade -y
-apt install -y git vim gcc curl ibus-mozc language-pack-ja openssh-server guake python3-pip google-chrome-stable code expect
+apt install -y git vim curl gcc fcitx-mozc $(check-language-support) openssh-server guake python3-pip google-chrome-stable code expect
 
-#gnome setting
+#locale setting
 
-update-locale LANG=ja_JP.UTF8
+localectl set-locale LANG=ja_JP.UTF-8
+im-config -n fcitx
 
 #guake setting
 
