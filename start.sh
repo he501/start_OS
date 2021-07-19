@@ -17,12 +17,12 @@ elif [[ $OSname = "Raspbian GNU/Linux"  ]];then
 		sudo ./start_raspberry.sh $(whoami)
 		./start_rust.sh
 elif [[ $OSname = "Ubuntu" ]];then
-	if [[ $(sudo dmesg | grep Hyper-V -c) -eq 0 ]];then
-		echo -e "\nOS is Ubuntu \n"
-		sudo ./start_ubuntu.sh $(whoami)
-	elif [[ $CPUarch = "aarch64"]];then
+	if [[ $CPUarch = "aarch64" ]];then
 		echo -e "\nOS is Ubuntu (with aarch64)\n"
 		sudo ./start_ubuntu_aarch64.sh $(whoami)
+	elif [[ $(sudo dmesg | grep Hyper-V -c) -eq 0 ]];then
+		echo -e "\nOS is Ubuntu \n"
+		sudo ./start_ubuntu.sh $(whoami)
 	else
 		echo -e "\nOS is Ubuntu (in HyperV)\n"
 		sudo ./start_ubuntu_v.sh $(whoami)
