@@ -7,4 +7,5 @@ send -- \"1\n\"
 interact
 exit 0
 "
+rustup component add rls
 rm RustSetup.sh
